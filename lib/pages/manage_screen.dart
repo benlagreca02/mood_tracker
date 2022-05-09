@@ -1,9 +1,11 @@
-
-
-
 import 'package:flutter/material.dart';
 import 'package:mood_tracking/src/user_model.dart';
 import 'package:provider/provider.dart';
+
+
+// Manages the different factor and emotion groups
+// This is where the user adds or removes groups/members of the groups
+
 
 class ManageScreen extends StatefulWidget {
   const ManageScreen({Key? key}) : super(key: key);
@@ -15,7 +17,7 @@ class ManageScreen extends StatefulWidget {
 class _ManageScreenState extends State<ManageScreen> {
   @override
   Widget build(BuildContext context) {
-    return FactorGroupForm();
+    return const FactorGroupForm();
   }
 }
 
