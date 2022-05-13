@@ -12,5 +12,5 @@ class LogEntry {
   final DateTime dateTime;
 
   LogEntry({required this.selectedFactors, required this.selectedEmotions,
-      required this.note, required this.dateTime});
+    this.note='', required this.dateTime});
 }

@@ -7,14 +7,14 @@ import 'package:provider/provider.dart';
 // This is where the user adds or removes groups/members of the groups
 
 
-class ManageScreen extends StatefulWidget {
-  const ManageScreen({Key? key}) : super(key: key);
+class EditScreen extends StatefulWidget {
+  const EditScreen({Key? key}) : super(key: key);
 
   @override
-  _ManageScreenState createState() => _ManageScreenState();
+  _EditScreenState createState() => _EditScreenState();
 }
 
-class _ManageScreenState extends State<ManageScreen> {
+class _EditScreenState extends State<EditScreen> {
   @override
   Widget build(BuildContext context) {
     return const FactorGroupForm();
@@ -42,16 +42,19 @@ class _FactorGroupFormState extends State<FactorGroupForm> {
         builder: (context, user, child) {
           return Column(
             children: [
-              TextFormField(
-                decoration: const InputDecoration(
-                  hintText: "Enter a new Factor Group Title",
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    hintText: "Enter a new Factor Group Title",
+                  ),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a name for the factor group';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a name for the factor group';
-                  }
-                  return null;
-                },
               ),
               ElevatedButton(
                 child: const Text("Add to factor groups"),

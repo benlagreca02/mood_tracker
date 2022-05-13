@@ -16,14 +16,31 @@ void main() {
         emotionGroupsSet: {
           Group<Emotion>(
             name: "EmotionGroup1",
-            icon: const Icon(Icons.adb),
-            members: {Emotion("Emotion1", -1)}
+            members: {
+              Emotion("EmotionMember1-1"),
+              Emotion("EmotionMember1-2"),
+              Emotion("EmotionMember1-3"),
+              Emotion("EmotionMember1-4"),
+              Emotion("EmotionMember1-5")
+            }
           ),
+          Group<Emotion>(
+              name: "EmotionGroup2",
+              members: {Emotion("EmotionMember2")}
+          ),
+          Group<Emotion>(
+              name: "EmotionGroup3",
+              members: {Emotion("EmotionMember3")}
+          ),
+          // Group<Emotion>(
+          //     name: "EmotionGroup4",
+          //     members: {Emotion("EmotionMember4", -1)}
+          // ),
         },
+
         factorGroupsSet: {
           Group<String>(
             name: "FactorGroup1",
-            icon: const Icon(Icons.school),
             members: {"Factor1", "Factor2", "Factor3"}
           )
         },
@@ -32,17 +49,21 @@ void main() {
         [
           LogEntry(
             selectedFactors: {"factor1", "factor2"},
-            selectedEmotions: {Emotion("Emotion1", 1), Emotion("Emotion2", 2)},
+            selectedEmotions: {Emotion("Emotion1"), Emotion("Emotion2")},
             note: "this is a note on the first entry!",
             dateTime: DateTime.utc(2002, 2,8),
           ),
-
-         LogEntry(
-           selectedFactors: {"factor3", "factor4"},
-           selectedEmotions: {Emotion("Emotion3", 4), Emotion("Emotion4", 4)},
-           note: "this is a note on the second entry!",
-           dateTime: DateTime.utc(2002, 10,2),
-        )
+          LogEntry(
+            selectedFactors: {"factor3", "factor4"},
+            selectedEmotions: {Emotion("Emotion3"), Emotion("Emotion4")},
+            note: "this is a note on the second entry!",
+            dateTime: DateTime.utc(2002, 10,2),
+          ),
+          LogEntry(
+            selectedFactors: {"factor5", "factor4"},
+            selectedEmotions: {Emotion("Emotion5"), Emotion("Emotion6")},
+            dateTime: DateTime.utc(2016,3,16),
+          )
         ],
       ),
       child:  MyApp()

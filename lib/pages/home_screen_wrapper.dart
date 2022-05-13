@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:mood_tracking/pages/home_screen.dart';
+import 'package:mood_tracking/pages/make_entry_screen.dart';
 
-import 'manage_screen.dart';
+import 'edit_screen.dart';
 
 class HomeScreenWrapper extends StatefulWidget {
   @override
@@ -21,9 +22,15 @@ class _HomeScreenWrapperState extends State<HomeScreenWrapper> {
   }
 
   static final List<Widget> _frontPageOptions = <Widget>[
-    ManageScreen(),
+    EditScreen(),
     HomeScreen(),
-    const Text('why are you here')
+    MakeEntryScreen()
+  ];
+
+  static final List<String> _titleOptions = <String>[
+    "Edit Groupings",
+    "Your Past Logs",
+    "Make a Log Entry"
   ];
 
 
@@ -38,17 +45,8 @@ class _HomeScreenWrapperState extends State<HomeScreenWrapper> {
 
 
       appBar: AppBar(
-        title: const Text("Mood Tracker"),
+        title: Text(_titleOptions[_bottomNavBarIndex]),
         centerTitle: true,
-      ),
-
-
-
-
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: () { print("Wowaza!");},
-        child: const Icon(Icons.add)
       ),
 
 
@@ -58,15 +56,15 @@ class _HomeScreenWrapperState extends State<HomeScreenWrapper> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.assignment),
-            label: 'Manage',
+            label: 'Edit',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.airline_seat_flat_angled_rounded),
-            label: 'filla',
+            icon: Icon(Icons.add),
+            label: 'Make Entry',
           ),
         ],
         currentIndex: _bottomNavBarIndex,
