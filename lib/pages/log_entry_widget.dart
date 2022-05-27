@@ -41,7 +41,7 @@ class LogEntryWidget extends StatelessWidget {
                 ],
               ),
               Row(
-                children: _logEntry.selectedFactors.map((e) => Text(e + ' ')).toList()
+                children: _logEntry.selectedFactors.map((e) => Text(e.toString() + ' ')).toList()
               )
             ]
 
@@ -113,7 +113,7 @@ class LogEntryFullReadout extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
             child: Text(
-              _logEntry.selectedFactors.fold("", (prevFactorString, nextFactor) => prevFactorString + " " + nextFactor)
+              _logEntry.selectedFactors.fold("", (prevFactorString, nextFactor) => prevFactorString + " " + nextFactor.toString())
             )
           ),
 
