@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mood_tracking/pages/log_entry_widget.dart';
+import 'package:mood_tracking/pages/widgets/log_entry_widget.dart';
 import 'package:mood_tracking/src/user_model.dart';
 import 'package:provider/provider.dart';
 

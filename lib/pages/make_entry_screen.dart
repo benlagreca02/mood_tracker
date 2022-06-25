@@ -32,8 +32,9 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
           runSpacing: 10,
           alignment: WrapAlignment.center,
         ),
+
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
           child: Text(
             'Why do you feel this way?',
             style: Theme.of(context).textTheme.headline5,
@@ -45,13 +46,36 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
             spacing: 10,
             runSpacing: 10,
             alignment: WrapAlignment.center),
+
         Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
             child: Text(
-              'Add some additional notes for more detail',
+              'Add some notes for more detail',
               style: Theme.of(context).textTheme.headline5,
               textAlign: TextAlign.center,
-            ))
+            )),
+
+        Padding(
+          padding: const EdgeInsets.fromLTRB(32, 0, 32, 32),
+          child: TextField(
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            decoration: const InputDecoration(
+              hintText: "Enter some notes here, this is optional"
+            ),
+            onChanged: (note){user.pendingNote = note;},
+          )
+        ),
+
+        Padding(
+          padding: const EdgeInsets.fromLTRB(32, 0, 32, 32),
+          child: Text(
+            'bruh moment',
+            style: Theme.of(context).textTheme.headline5,
+            textAlign: TextAlign.center,
+          )
+        )
+
       ],
     );
   }

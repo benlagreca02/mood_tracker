@@ -82,12 +82,20 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark(),
-      initialRoute: '/homeScreen',
-      routes: {
-        '/homeScreen': (context) => HomeScreenWrapper(),
-      }
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if(!currentFocus.hasPrimaryFocus){
+          currentFocus.unfocus();
+        }
+      },
+      child: MaterialApp(
+        theme: ThemeData.dark(),
+        initialRoute: '/homeScreen',
+        routes: {
+          '/homeScreen': (context) => HomeScreenWrapper(),
+        }
+      ),
     );
   }
 }

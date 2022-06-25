@@ -20,6 +20,8 @@ class UserModel extends ChangeNotifier {
   Set<Emotion> pendingEmotions= {};
   Set<Factor> pendingFactors = {};
 
+  String pendingNote = '';
+
   // this will somehow get changed to fetch from a server based on username and pw?
   UserModel(
       {required this.name, required this.emotionGroupsSet, required this.factorGroupsSet,
@@ -73,6 +75,12 @@ class UserModel extends ChangeNotifier {
       print("Types didn't match in check! returning false...");
       return false;
     }
+  }
+
+  void clearAllPending() {
+    pendingEmotions = {};
+    pendingFactors = {};
+    pendingNote = "";
   }
 
 
