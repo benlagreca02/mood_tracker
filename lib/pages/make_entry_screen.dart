@@ -88,7 +88,7 @@ class GroupCardWidget<T> extends StatelessWidget {
   final Group<T> group;
 
 
-  const GroupCardWidget( this.group);
+  const GroupCardWidget(this.group);
 
   @override
   Widget build(BuildContext context) {
