@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mood_tracking/pages/widgets/group_display_widget.dart';
 import 'package:mood_tracking/src/group.dart';
 import 'package:mood_tracking/src/user_model.dart';
 import 'package:provider/provider.dart';
 
+
 class MakeEntryScreen extends StatefulWidget {
+
   const MakeEntryScreen({Key? key}) : super(key: key);
 
   @override
@@ -113,79 +116,6 @@ class GroupCardWidget<T> extends StatelessWidget {
           color: Theme.of(context).backgroundColor,
         ),
         child: Text(group.name, textAlign: TextAlign.center),
-      ),
-    );
-  }
-}
-
-
-
-
-
-// The "popup dialog" that appears when a group is tapped
-class GroupDisplayWidget<T> extends StatelessWidget {
-  final Group<T> _group;
-
-  const GroupDisplayWidget(this._group);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: _group.members.map((currGroupMember) => GroupMemberToken<T>(currGroupMember)).toList(),
-    );
-  }
-}
-
-// The little token that shows up
-class GroupMemberToken<T> extends StatefulWidget {
-  final T member;
-
-
-  GroupMemberToken(this.member);
-
-  @override
-  State<GroupMemberToken> createState() => _GroupMemberTokenState();
-}
-
-class _GroupMemberTokenState extends State<GroupMemberToken> {
-  late bool _isSelected;
-
-  // Will be null on first run through before pressed
-  // I *think* this is really bad but I don't know
-  late Color _tokenColor;
-
-  @override
-  Widget build(BuildContext context) {
-    final user = Provider.of<UserModel>(context, listen: false);
-    _isSelected = user.containsPending(widget.member);
-    _tokenColor =  (_isSelected) ? Theme.of(context).colorScheme.secondary : Theme.of(context).backgroundColor;
-    return Padding(
-      padding: const EdgeInsets.all(10),
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            _isSelected = !_isSelected;
-
-            // toggle selected
-            if (_isSelected) {
-              user.addPending(widget.member);
-            }
-            else{
-              user.removePending(widget.member);
-            }
-            // on build, assign color
-            _tokenColor = (_isSelected) ? Theme.of(context).colorScheme.secondary : Theme.of(context).backgroundColor;
-          });
-        },
-        child: Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-              // if the token hasn't been pressed, _tokenColor is null therefore set it to background color
-              color: _tokenColor,
-              borderRadius: const BorderRadius.all(Radius.circular(40))),
-          child: Text(widget.member.toString()),
-        ),
       ),
     );
   }
