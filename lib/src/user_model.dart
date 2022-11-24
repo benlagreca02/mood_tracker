@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracking/src/emotion.dart';
 import 'package:mood_tracking/src/factor.dart';
-import 'package:mood_tracking/src/group.dart';
 import 'package:mood_tracking/src/log_entry.dart';
 import 'package:mood_tracking/src/stat.dart';
 
@@ -10,10 +9,9 @@ class UserModel extends ChangeNotifier {
 
   String name;
 
-  // Users have their master list of emotion groups and factor groups,
-  // this is simply how they will display, and the groupings have no 'deeper meaning'
-  Set<Group<Emotion>> emotionGroupsSet;
-  Set<Group<Factor>> factorGroupsSet;
+  // Users have their master list of emotions and factor,
+  List<Emotion> emotionsSet;
+  List<Factor> factorsSet;
 
   List<LogEntry> logEntryList; // sorted by date hopefully?
 
@@ -30,7 +28,7 @@ class UserModel extends ChangeNotifier {
   // this will somehow get changed to fetch from a server based on username and pw?
   // no idea yet...
   UserModel(
-      {required this.name, required this.emotionGroupsSet, required this.factorGroupsSet,
+      {required this.name, required this.emotionsSet, required this.factorsSet,
         required this.logEntryList});
 
 

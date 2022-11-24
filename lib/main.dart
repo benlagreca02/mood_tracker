@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracking/src/emotion.dart';
 import 'package:mood_tracking/src/factor.dart';
-import 'package:mood_tracking/src/group.dart';
 import 'package:mood_tracking/src/log_entry.dart';
 import 'package:provider/provider.dart';
 import 'src/user_model.dart';
@@ -11,40 +10,22 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       // dummy data, really not that epic
-      create: (context) => UserModel(
+      create: (context) =>
+      UserModel(
         name: "Brian May",
 
-        emotionGroupsSet: {
-          Group<Emotion>(
-            name: "EmotionGroup1",
-            members: {
-              Emotion("EmotionMember1-1"),
-              Emotion("EmotionMember1-2"),
-              Emotion("EmotionMember1-3"),
-              Emotion("EmotionMember1-4"),
-              Emotion("EmotionMember1-5")
-            }
-          ),
-          Group<Emotion>(
-              name: "EmotionGroup2",
-              members: {Emotion("EmotionMember2")}
-          ),
-          Group<Emotion>(
-              name: "EmotionGroup3",
-              members: {Emotion("EmotionMember3")}
-          ),
-          // Group<Emotion>(
-          //     name: "EmotionGroup4",
-          //     members: {Emotion("EmotionMember4", -1)}
-          // ),
-        },
-
-        factorGroupsSet: {
-          Group<Factor>(
-            name: "FactorGroup1",
-            members: {Factor("FactorG1M1")}
-          )
-        },
+        emotionsSet: [
+          Emotion("Happy"),
+          Emotion("Sad"),
+          Emotion("Anxious"),
+          Emotion("Angy")
+        ],
+        factorsSet: [
+          Factor("skoo"),
+          Factor("Work"),
+          Factor("Social life"),
+          Factor("health")
+        ],
 
         logEntryList:
         [

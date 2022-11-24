@@ -17,57 +17,8 @@ class EditScreen extends StatefulWidget {
 class _EditScreenState extends State<EditScreen> {
   @override
   Widget build(BuildContext context) {
-    return const FactorGroupForm();
+    return const Text("This will be implemented soon hopefully maybe!");
   }
 }
 
 
-
-class FactorGroupForm extends StatefulWidget {
-  const FactorGroupForm({Key? key}) : super(key: key);
-
-  @override
-  _FactorGroupFormState createState() => _FactorGroupFormState();
-}
-
-class _FactorGroupFormState extends State<FactorGroupForm> {
-
-  final GlobalKey<FormState> _factorGroupFormKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _factorGroupFormKey,
-      child: Consumer<UserModel>(
-        builder: (context, user, child) {
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: const InputDecoration(
-                    hintText: "Enter a new Factor Group Title",
-                  ),
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a name for the factor group';
-                    }
-                    return null;
-                  },
-                ),
-              ),
-              ElevatedButton(
-                child: const Text("Add to factor groups"),
-                onPressed: () {
-                  if (_factorGroupFormKey.currentState!.validate()) {
-                    // runs when the form is valid and button is pressed
-                  }
-                },
-              ),
-            ],
-          );
-        }
-      ),
-    );
-  }
-}

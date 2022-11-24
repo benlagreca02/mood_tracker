@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mood_tracking/pages/widgets/group_card_widget.dart';
 import 'package:mood_tracking/src/user_model.dart';
+import 'package:mood_tracking/pages/widgets/stat_token.dart';
 import 'package:provider/provider.dart';
 
 
@@ -29,7 +29,7 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
           ),
         ),
         Wrap(
-          children: user.emotionGroupsSet.map((currEmotionGroup) => GroupCardWidget(currEmotionGroup)).toList(),
+          children: user.emotionsSet.map((currEmotion) => StatToken(currEmotion)).toList(),
           spacing: 10,
           runSpacing: 10,
           alignment: WrapAlignment.center,
@@ -44,7 +44,7 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
           ),
         ),
         Wrap(
-            children: user.factorGroupsSet.map((currFactorGroup) => GroupCardWidget(currFactorGroup)).toList(),
+            children: user.factorsSet.map((currFactor) => StatToken(currFactor)).toList(),
             spacing: 10,
             runSpacing: 10,
             alignment: WrapAlignment.center),

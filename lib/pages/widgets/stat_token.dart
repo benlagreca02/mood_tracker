@@ -7,16 +7,16 @@ import 'package:provider/provider.dart';
 // the small token that is selected by the user
 // primarily for emotions and factors that are a part of a group
 
-class GroupMemberToken<T> extends StatefulWidget {
+class StatToken<T> extends StatefulWidget {
   final T member;
 
-  GroupMemberToken(this.member);
+  StatToken(this.member);
 
   @override
-  State<GroupMemberToken> createState() => _GroupMemberTokenState();
+  State<StatToken> createState() => _StatTokenState();
 }
 
-class _GroupMemberTokenState extends State<GroupMemberToken> {
+class _StatTokenState extends State<StatToken> {
   late bool _isSelected;
 
   // Will be null on first run through before pressed
