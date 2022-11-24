@@ -10,7 +10,6 @@ class Group<T>{
   // doesn't really need to be generic but ill keep it like this
   // in case I need it in the future
 
-  // might make this private in the future, but it looks too slick to change imo
   final Set<T> members;
 
   Group({required this.name, required this.members});

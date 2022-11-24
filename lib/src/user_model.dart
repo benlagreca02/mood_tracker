@@ -4,6 +4,7 @@ import 'package:mood_tracking/src/emotion.dart';
 import 'package:mood_tracking/src/factor.dart';
 import 'package:mood_tracking/src/group.dart';
 import 'package:mood_tracking/src/log_entry.dart';
+import 'package:mood_tracking/src/stat.dart';
 
 class UserModel extends ChangeNotifier {
 
@@ -20,9 +21,14 @@ class UserModel extends ChangeNotifier {
   Set<Emotion> pendingEmotions= {};
   Set<Factor> pendingFactors = {};
 
+  Set<Stat> getAllPending(){
+    return (pendingEmotions as Set<Stat>).union(pendingFactors as Set<Stat>);
+  }
+  
   String pendingNote = '';
 
   // this will somehow get changed to fetch from a server based on username and pw?
+  // no idea yet...
   UserModel(
       {required this.name, required this.emotionGroupsSet, required this.factorGroupsSet,
         required this.logEntryList});
@@ -47,8 +53,9 @@ class UserModel extends ChangeNotifier {
       pendingFactors.add(toAddToPending);
     }
     else{
-      throw Exception("Youre trying to add some pending thing of a bad type! This should NEVER happen");
+      throw Exception("You're trying to add some pending thing of a bad type! This should NEVER happen");
     }
+    notifyListeners();
   }
 
   void removePending(dynamic toTakeFromPending){
@@ -59,8 +66,9 @@ class UserModel extends ChangeNotifier {
       pendingFactors.remove(toTakeFromPending);
     }
     else{
-      throw Exception("Youre trying to remove some pending thing of a bad type! This should NEVER happen");
+      throw Exception("You're trying to remove some pending thing of a bad type! This should NEVER happen");
     }
+    notifyListeners();
   }
 
 
@@ -81,6 +89,17 @@ class UserModel extends ChangeNotifier {
     pendingEmotions = {};
     pendingFactors = {};
     pendingNote = "";
+    notifyListeners();
+  }
+
+  Set getPendingOfType(Type t) {
+    switch (t) {
+      case Emotion:
+        return pendingEmotions;
+      case Factor:
+        return pendingFactors;
+    }
+    return <dynamic>{};  // to avoid returning nothing
   }
 
 

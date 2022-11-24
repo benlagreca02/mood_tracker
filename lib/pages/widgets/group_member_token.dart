@@ -4,7 +4,9 @@ import 'package:flutter/widgets.dart';
 import 'package:mood_tracking/src/user_model.dart';
 import 'package:provider/provider.dart';
 
-// The little token that shows up
+// the small token that is selected by the user
+// primarily for emotions and factors that are a part of a group
+
 class GroupMemberToken<T> extends StatefulWidget {
   final T member;
 

@@ -45,8 +45,6 @@ class LogEntryWidget extends StatelessWidget {
                 children: _logEntry.selectedFactors.map((e) => Text(e.toString() + ' ')).toList()
               )
             ]
-
-
           ),
         ),
       ),

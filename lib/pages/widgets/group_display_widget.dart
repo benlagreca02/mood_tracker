@@ -5,6 +5,7 @@ import 'package:mood_tracking/pages/widgets/group_member_token.dart';
 
 
 // The "popup dialog" that appears when a group is tapped
+// this contains all of the "tokens" that will be selected by the user
 class GroupDisplayWidget<T> extends StatelessWidget {
   final Group<T> _group;
 
