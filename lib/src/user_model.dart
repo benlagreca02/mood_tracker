@@ -15,7 +15,7 @@ class UserModel extends ChangeNotifier {
 
   List<LogEntry> logEntryList; // sorted by date hopefully?
 
-  // the 'selected' ones that will be created into a new log entry, see above "groupings have no deeper meaning"
+  // the 'selected' ones that will be created into a new log entry
   Set<Emotion> pendingEmotions= {};
   Set<Factor> pendingFactors = {};
 
@@ -32,8 +32,15 @@ class UserModel extends ChangeNotifier {
         required this.logEntryList});
 
 
-  void addLogEntry(LogEntry newEntry) {
-    logEntryList.add(newEntry);
+  void addLogEntry(){
+    LogEntry lg = LogEntry(
+      selectedFactors: pendingFactors,
+      selectedEmotions: pendingEmotions,
+      note: pendingNote,
+      dateTime: DateTime.now());
+
+    logEntryList.add(lg);
+
     notifyListeners();
   }
 

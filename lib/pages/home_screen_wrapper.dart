@@ -24,9 +24,9 @@ class _HomeScreenWrapperState extends State<HomeScreenWrapper> {
   ];
 
   static final List<Widget> _titleOptions = <Widget>[
-    Text("Edit Groupings"),
-    Text("Your Past Logs"),
-    Text("Make a Log Entry"),
+    const Text("IMPLEMENT ME"),
+    const Text("Your Past Logs"),
+    const Text("Make a Log Entry"),
   ];
 
   // is there a more "sound" way to do this, or is empty containers ok?
@@ -59,20 +59,16 @@ class _HomeScreenWrapperState extends State<HomeScreenWrapper> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body:  Center(
-        child: _frontPageOptions.elementAt(_bottomNavBarIndex),
+      body: IndexedStack(
+        index: _bottomNavBarIndex,
+        children: _frontPageOptions,
       ),
-
-
-
 
       appBar: AppBar(
         title: _titleOptions.elementAt(_bottomNavBarIndex),
         actions: [_actionOptions.elementAt(_bottomNavBarIndex)],
         centerTitle: true,
       ),
-
-
 
 
       bottomNavigationBar: BottomNavigationBar(

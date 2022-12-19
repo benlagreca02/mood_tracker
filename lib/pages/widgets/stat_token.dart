@@ -5,7 +5,7 @@ import 'package:mood_tracking/src/user_model.dart';
 import 'package:provider/provider.dart';
 
 // the small token that is selected by the user
-// primarily for emotions and factors that are a part of a group
+// primarily for emotions and factors
 
 class StatToken<T> extends StatefulWidget {
   final T member;
@@ -25,16 +25,15 @@ class _StatTokenState extends State<StatToken> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<UserModel>(context, listen: false);
+    final user = Provider.of<UserModel>(context, listen: true);
     _isSelected = user.containsPending(widget.member);
     _tokenColor =  (_isSelected) ? Theme.of(context).colorScheme.secondary : Theme.of(context).backgroundColor;
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(5),
       child: GestureDetector(
         onTap: () {
           setState(() {
             _isSelected = !_isSelected;
-
             // toggle selected
             if (_isSelected) {
               user.addPending(widget.member);
@@ -47,12 +46,16 @@ class _StatTokenState extends State<StatToken> {
           });
         },
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(15),
+          width: 120,
           decoration: BoxDecoration(
             // if the token hasn't been pressed, _tokenColor is null therefore set it to background color
               color: _tokenColor,
               borderRadius: const BorderRadius.all(Radius.circular(40))),
-          child: Text(widget.member.toString()),
+          child: Text(widget.member.toString(),
+              textAlign: TextAlign.center,
+
+          ),
         ),
       ),
     );

@@ -18,7 +18,12 @@ void main() {
           Emotion("Happy"),
           Emotion("Sad"),
           Emotion("Anxious"),
-          Emotion("Angy")
+          Emotion("Angy"),
+          Emotion("numb"),
+          Emotion("excited"),
+          Emotion("stressed"),
+          Emotion("loving"),
+          Emotion("passionate"),
         ],
         factorsSet: [
           Factor("skoo"),
@@ -63,20 +68,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-        if(!currentFocus.hasPrimaryFocus){
-          currentFocus.unfocus();
-        }
-      },
-      child: MaterialApp(
-        theme: ThemeData.dark(),
-        initialRoute: '/homeScreen',
-        routes: {
-          '/homeScreen': (context) => HomeScreenWrapper(),
-        }
-      ),
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      initialRoute: '/homeScreen',
+      routes: {
+        '/homeScreen': (context) => HomeScreenWrapper(),
+      }
     );
   }
 }
