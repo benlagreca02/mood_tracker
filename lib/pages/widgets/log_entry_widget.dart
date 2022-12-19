@@ -9,7 +9,7 @@ class LogEntryWidget extends StatelessWidget {
 
   final LogEntry _logEntry;
 
-  LogEntryWidget(this._logEntry);
+  const LogEntryWidget(this._logEntry);
 
   @override
   Widget build(BuildContext context) {
@@ -27,23 +27,20 @@ class LogEntryWidget extends StatelessWidget {
               )
           );
         },
-        // The small summary card shown on the screen
+        // The small summary card shown on the home screen
         child: Container(
           padding: const EdgeInsets.all(16),
           color: Theme.of(context).cardColor,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-
                 children: [
                   Expanded(child: Text(_logEntry.selectedEmotions.first.name, style: Theme.of(context).textTheme.headline5)),
                   Text(DateFormat('E. LLL. d yyyy').format(_logEntry.dateTime))
                 ],
               ),
-              Row(
-                children: _logEntry.selectedFactors.map((e) => Text(e.toString() + ' ')).toList()
-              )
+              Text(_logEntry.selectedFactors.join(", "), textAlign: TextAlign.left)
             ]
           ),
         ),

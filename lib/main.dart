@@ -10,7 +10,8 @@ import 'src/user_model.dart';
 void main() {
   runApp(
     ChangeNotifierProvider(
-      // dummy data, really not that epic
+      // This is just dummy data, in the future, this will be pulled from some webserver that I make
+      // The server will hold all user's data and their relations
       create: (context) =>
       UserModel(
         name: "Brian May",
@@ -19,42 +20,44 @@ void main() {
           Emotion("Happy"),
           Emotion("Sad"),
           Emotion("Anxious"),
-          Emotion("Angy"),
-          Emotion("numb"),
-          Emotion("excited"),
-          Emotion("stressed"),
-          Emotion("loving"),
-          Emotion("passionate"),
+          Emotion("Angry"),
+          Emotion("Numb"),
+          Emotion("Excited"),
+          Emotion("Stressed"),
+          Emotion("Loving"),
+          Emotion("Passionate"),
         ],
         factorsSet: [
-          Factor("skoo"),
+          Factor("School"),
           Factor("Work"),
           Factor("Social life"),
-          Factor("health")
+          Factor("Health"),
+          Factor("Money"),
+          Factor("Holidays"),
         ],
 
         logEntryList:
         [
           LogEntry(
-            selectedFactors: {Factor("factor1"), Factor("factor2")},
-            selectedEmotions: {Emotion("Emotion1"), Emotion("Emotion2")},
-            note: "this is a note on the first entry!",
+            selectedFactors: {Factor("Accomplished Goals"), Factor("School")},
+            selectedEmotions: {Emotion("Proud"), Emotion("Excited")},
+            note: "Just finished a big project!",
             dateTime: DateTime.utc(2002, 2,8),
           ),
           LogEntry(
-            selectedFactors: {Factor("factor3"), Factor("factor4")},
-            selectedEmotions: {Emotion("Emotion3"), Emotion("Emotion4")},
-            note: "this is a note on the second entry!",
+            selectedFactors: {Factor("School")},
+            selectedEmotions: {Emotion("Depressed"), Emotion("Hopeless")},
+            note: "Got a really bad grade on that project",
             dateTime: DateTime.utc(2002, 10,2),
           ),
           LogEntry(
-            selectedFactors: {Factor("factor5"), Factor("factor6")},
-            selectedEmotions: {Emotion("Emotion5"), Emotion("Emotion6")},
-            dateTime: DateTime.utc(2016,3,16),
+            selectedFactors: {Factor("The Mrs.")},
+            selectedEmotions: {Emotion("Happy")},
+            dateTime: DateTime.utc(2022,11,17),
           )
         ],
       ),
-      child:  MyApp()
+      child:  const MyApp()
     )
   );
 }
@@ -62,6 +65,8 @@ void main() {
 
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -74,6 +79,7 @@ class _MyAppState extends State<MyApp> {
       initialRoute: '/homeScreen',
       routes: {
         '/homeScreen': (context) => const HomeScreen(),
+        // In the future, I may change the make entry screen to a popup? For now it works fine though
         '/makeEntryScreen': (context) => const MakeEntryScreen(),
       }
     );
