@@ -13,11 +13,23 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Consumer<UserModel>(
-        builder:(context, user, child) => ListView(
-          children: user.logEntryList.map((e) => LogEntryWidget(e)).toList()
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Welcome back!"),
+      ),
+      body: Center(
+        child: Consumer<UserModel>(
+          builder:(context, user, child) => ListView(
+            children: user.logEntryList.map((e) => LogEntryWidget(e)).toList()
+          ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          Navigator.pushNamed(context, "/makeEntryScreen");
+        },
       ),
     );
   }

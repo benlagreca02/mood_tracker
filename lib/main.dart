@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:mood_tracking/pages/home_screen.dart';
+import 'package:mood_tracking/pages/make_entry_screen.dart';
 import 'package:mood_tracking/src/emotion.dart';
 import 'package:mood_tracking/src/factor.dart';
 import 'package:mood_tracking/src/log_entry.dart';
 import 'package:provider/provider.dart';
 import 'src/user_model.dart';
-import 'pages/home_screen_wrapper.dart';
 
 void main() {
   runApp(
@@ -72,7 +73,8 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData.dark(),
       initialRoute: '/homeScreen',
       routes: {
-        '/homeScreen': (context) => HomeScreenWrapper(),
+        '/homeScreen': (context) => const HomeScreen(),
+        '/makeEntryScreen': (context) => const MakeEntryScreen(),
       }
     );
   }

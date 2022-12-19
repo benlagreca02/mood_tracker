@@ -15,7 +15,7 @@ class LogEntryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      // The full readout when summary is tapped
+      // spawn the full readout when summary is tapped
       child: InkWell(
         onTap: (){
           showDialog(

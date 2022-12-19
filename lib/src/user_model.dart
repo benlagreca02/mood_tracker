@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mood_tracking/src/emotion.dart';
 import 'package:mood_tracking/src/factor.dart';
 import 'package:mood_tracking/src/log_entry.dart';
-import 'package:mood_tracking/src/stat.dart';
 
 class UserModel extends ChangeNotifier {
 
@@ -19,10 +18,6 @@ class UserModel extends ChangeNotifier {
   Set<Emotion> pendingEmotions= {};
   Set<Factor> pendingFactors = {};
 
-  Set<Stat> getAllPending(){
-    return (pendingEmotions as Set<Stat>).union(pendingFactors as Set<Stat>);
-  }
-  
   String pendingNote = '';
 
   // this will somehow get changed to fetch from a server based on username and pw?
