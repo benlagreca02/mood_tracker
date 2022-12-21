@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_tracking/src/user_model.dart';
 import 'package:mood_tracking/pages/widgets/stat_token.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 
 class MakeEntryScreen extends StatefulWidget {
@@ -15,13 +16,18 @@ class MakeEntryScreen extends StatefulWidget {
 class _MakeEntryScreenState extends State<MakeEntryScreen> {
   @override
   Widget build(BuildContext context) {
+
     final user = Provider.of<UserModel>(context, listen: false);
-    // key to 
+
     final _makeEntryFormKey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Make an entry"),
+        actions: [
+          IconButton(onPressed: user.clearAllPending, icon: const Icon(Icons.delete_forever))
+        ],
       ),
       body: Form(
         key: _makeEntryFormKey,
@@ -38,6 +44,7 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
                 print("Emotions: ${user.pendingEmotions}");
                 print("Factors:  ${user.pendingFactors}");
                 print("Note:     ${user.pendingNote}");
+                print("Datetime: ${user.pendingDateTime ?? "Now"}");
               },
             ),),
 
@@ -84,7 +91,7 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
                 keyboardType: TextInputType.multiline,
                 maxLines: null,
                 decoration: const InputDecoration(
-                  hintText: "Enter some notes here, this is optional"
+                  hintText: "This is an optional field"
                 ),
                 onChanged: (note){
                     user.pendingNote = note;
@@ -92,20 +99,78 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
               )
             ),
 
+            // Override Date button
             Padding(
-              padding: const EdgeInsets.fromLTRB(32, 0, 32, 32),
-              child: ElevatedButton(
-                child: const Text("Create Log Entry"),
-                onPressed: (){
-                  user.addLogEntry();
-                  user.clearAllPending();
-                  Navigator.pop(context);
-                },
-              )
+                padding: const EdgeInsets.fromLTRB(32,0,32,32),
+                child: Center(
+                  child: OutlinedButton(
+                    child: const Text(
+                        "Change Date & Time"
+                    ),
+                    onPressed: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: user.pendingDateTime ?? DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime(2100),
+                      );
+
+                      // if user just tapped out or hit cancel, just escape out of the whole sequence
+                      if(pickedDate == null) {
+                        return;
+                      }
+
+                      TimeOfDay? pickedTime = await showTimePicker(
+                        context: context,
+                        initialTime: TimeOfDay.fromDateTime(user.pendingDateTime ?? DateTime.now())
+                      );
+
+                      if(pickedTime == null) {
+                        return;
+                      }
+
+                      DateTime pickedDateTime = DateTime(
+                        pickedDate.year,
+                        pickedDate.month,
+                        pickedDate.day,
+                        pickedTime.hour,
+                        pickedTime.minute,
+                      );
+
+                      setState(() => user.pendingDateTime = pickedDateTime);
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content:
+                            Text("Date for this entry set to ${DateFormat("LLL. d, yy H:mm").format(pickedDateTime)}"))
+                      );
+
+                    },
+                  ),
+                )
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 64),
+              child: Center(
+                child: Card(
+                  child: Text( (user.pendingDateTime == null)? "" : user.pendingDateTime.toString() ),
+
+                ),
+              ),
+
             )
 
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.check),
+        onPressed: () {
+          // A confetti animation would be cute here I think
+          user.addLogEntry();
+          user.clearAllPending();
+          Navigator.pop(context);
+        },
       ),
     );
   }

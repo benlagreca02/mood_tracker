@@ -8,17 +8,20 @@ class UserModel extends ChangeNotifier {
 
   String name;
 
-  // Users have their master list of emotions and factor,
+  // Users have their master list of emotions and factors
+  // these are all of the emotions and factors they can select
   List<Emotion> emotionsSet;
   List<Factor> factorsSet;
 
-  List<LogEntry> logEntryList; // sorted by date hopefully?
+  List<LogEntry> logEntryList;
 
   // the 'selected' ones that will be created into a new log entry
   Set<Emotion> pendingEmotions= {};
   Set<Factor> pendingFactors = {};
 
   String pendingNote = '';
+
+  DateTime? pendingDateTime;
 
   // this will somehow get changed to fetch from a server based on username and pw?
   // no idea yet...
@@ -32,7 +35,8 @@ class UserModel extends ChangeNotifier {
       selectedFactors: pendingFactors,
       selectedEmotions: pendingEmotions,
       note: pendingNote,
-      dateTime: DateTime.now());
+      dateTime: pendingDateTime ?? DateTime.now()
+    );
 
     logEntryList.add(lg);
 
@@ -89,6 +93,7 @@ class UserModel extends ChangeNotifier {
     pendingEmotions = {};
     pendingFactors = {};
     pendingNote = "";
+    pendingDateTime = null;
     notifyListeners();
   }
 
