@@ -26,7 +26,12 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
         centerTitle: true,
         title: const Text("Make an entry"),
         actions: [
-          IconButton(onPressed: user.clearAllPending, icon: const Icon(Icons.delete_forever))
+          IconButton(onPressed:
+          (){
+            setState((){
+              user.clearAllPending();
+            });
+          }, icon: const Icon(Icons.delete_forever))
         ],
       ),
       body: Form(
@@ -149,12 +154,30 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
                   ),
                 )
             ),
+
+            (user.pendingDateTime == null)? const SizedBox.shrink() :
             Padding(
               padding: const EdgeInsets.only(bottom: 64),
               child: Center(
-                child: Card(
-                  child: Text( (user.pendingDateTime == null)? "" : user.pendingDateTime.toString() ),
+                child: GestureDetector(
+                  onLongPress: () {
+                    print("Goodbye date!");
+                    setState((){
+                      user.pendingDateTime = null;
+                    });
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                      color: Theme.of(context).backgroundColor
+                    ),
 
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+
+                      child: Text(user.pendingDateTime.toString(), style: Theme.of(context).primaryTextTheme.bodyText1,),
+                    ),
+                  ),
                 ),
               ),
 
