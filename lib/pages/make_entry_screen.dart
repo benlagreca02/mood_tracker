@@ -147,7 +147,7 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                             content:
-                            Text("Date for this entry set to ${DateFormat("LLL. d, yy H:mm").format(pickedDateTime)}"))
+                            Text("Date for this entry set to ${DateFormat("LLL. d, yyyy h:mm a").format(pickedDateTime)}"))
                       );
 
                     },
@@ -159,29 +159,36 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
             Padding(
               padding: const EdgeInsets.only(bottom: 64),
               child: Center(
-                child: GestureDetector(
+                child: InkWell(
+                  // this border is for the animation
+                  customBorder:RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
                   onLongPress: () {
-                    print("Goodbye date!");
                     setState((){
                       user.pendingDateTime = null;
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content:
+                            Text("Removed custom date/time from this entry")
+                        )
+                      );
                     });
                   },
-                  child: Container(
+                  child: Ink(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(30)),
-                      color: Theme.of(context).backgroundColor
+                        color: Theme.of(context).backgroundColor,
+                        borderRadius: const BorderRadius.all(Radius.circular(30)) // this one is for the colored background
                     ),
-
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(16.0),
 
-                      child: Text(user.pendingDateTime.toString(), style: Theme.of(context).primaryTextTheme.bodyText1,),
+                        child: Text(DateFormat("EEEE, MMM d, yyyy, h:mm a").format(user.pendingDateTime!), style: Theme.of(context).primaryTextTheme.bodyText1,),
+                      ),
                     ),
                   ),
                 ),
               ),
-
-            )
 
           ],
         ),
