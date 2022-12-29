@@ -10,6 +10,12 @@ class LogEntry {
   final String note;
   final DateTime dateTime;
 
-  LogEntry({required this.selectedFactors, required this.selectedEmotions,
-    this.note='', required this.dateTime});
+  LogEntry(
+      {
+        required this.selectedFactors,
+        required this.selectedEmotions,
+        this.note='',
+        required this.dateTime
+      }
+  );
 }

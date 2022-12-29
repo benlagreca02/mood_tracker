@@ -58,7 +58,7 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
               child: Text(
                 'How do you feel?',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
             Wrap(
@@ -72,7 +72,7 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
               padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
               child: Text(
                 'Why do you feel this way?',
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headlineSmall,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -86,7 +86,7 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
                 padding: const EdgeInsets.fromLTRB(16, 48, 16, 16),
                 child: Text(
                   'Add some notes for more detail',
-                  style: Theme.of(context).textTheme.headline5,
+                  style: Theme.of(context).textTheme.headlineSmall,
                   textAlign: TextAlign.center,
                 )),
 
@@ -183,7 +183,7 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
                     child: Padding(
                         padding: const EdgeInsets.all(16.0),
 
-                        child: Text(DateFormat("EEEE, MMM d, yyyy, h:mm a").format(user.pendingDateTime!), style: Theme.of(context).primaryTextTheme.bodyText1,),
+                        child: Text(DateFormat("EEEE, MMM d, yyyy, h:mm a").format(user.pendingDateTime!), style: Theme.of(context).primaryTextTheme.bodyLarge,),
                       ),
                     ),
                   ),
@@ -197,9 +197,16 @@ class _MakeEntryScreenState extends State<MakeEntryScreen> {
         child: const Icon(Icons.check),
         onPressed: () {
           // A confetti animation would be cute here I think
+          if(user.pendingEmotions.isEmpty){
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text("Must select at least one emotion!"))
+            );
+            return;
+          }
           user.addLogEntry();
           user.clearAllPending();
           Navigator.pop(context);
+
         },
       ),
     );
