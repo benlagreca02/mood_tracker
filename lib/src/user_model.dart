@@ -106,7 +106,4 @@ class UserModel extends ChangeNotifier {
     }
     return <dynamic>{};  // to avoid returning nothing
   }
-
-
-
 }
