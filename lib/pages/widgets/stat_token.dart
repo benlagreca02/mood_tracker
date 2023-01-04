@@ -20,6 +20,10 @@ class _StatTokenState extends State<StatToken> {
 
   @override
   Widget build(BuildContext context) {
+
+    // for inkwell best practice
+    assert(debugCheckHasMaterial(context));
+
     final user = Provider.of<UserModel>(context, listen: true);
     _isSelected = user.containsPending(widget.member);
 
@@ -30,7 +34,11 @@ class _StatTokenState extends State<StatToken> {
 
     return Padding(
       padding: const EdgeInsets.all(5),
-      child: GestureDetector(
+      child: InkWell(
+        splashColor: _tokenColor,
+        customBorder: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30)
+        ),
         onTap: () {
           setState(() {
             _isSelected = !_isSelected;
@@ -46,12 +54,13 @@ class _StatTokenState extends State<StatToken> {
             _tokenColor = (_isSelected) ? fgColor : bgColor;
           });
         },
-        child: Container(
+        child: Ink(
           padding: const EdgeInsets.all(15),
           width: 120,
           decoration: BoxDecoration(
-              color: _tokenColor,
-              borderRadius: const BorderRadius.all(Radius.circular(40))),
+            color: _tokenColor,
+            borderRadius: const BorderRadius.all(Radius.circular(30))
+          ),
           child: Text(widget.member.toString(),
               textAlign: TextAlign.center,
               style: const TextStyle(color: Colors.black),  // this will probably change eventually when I do a UI 'prettiness' overhaul
