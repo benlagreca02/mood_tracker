@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mood_tracking/src/emotion.dart';
 import 'package:mood_tracking/src/factor.dart';
 import 'package:mood_tracking/src/log_entry.dart';
+import 'package:mood_tracking/src/stat.dart';
 
 class UserModel extends ChangeNotifier {
 
@@ -76,17 +77,15 @@ class UserModel extends ChangeNotifier {
   }
 
 
-  bool containsPending(dynamic toCheckPending){
+  /// Checks to see if a stat is "pending" i.e. if it is to be put into a log entry
+  bool containsPending(Stat toCheckPending){
     if(toCheckPending is Emotion){
       return pendingEmotions.contains(toCheckPending);
     }
     else if(toCheckPending is Factor){
       return pendingFactors.contains(toCheckPending);
     }
-    else{
-      print("Types didn't match in check! returning false...");
-      return false;
-    }
+    return false;
   }
 
   void clearAllPending() {
