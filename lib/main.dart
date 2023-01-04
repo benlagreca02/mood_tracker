@@ -17,15 +17,15 @@ void main() {
         name: "Brian May",
 
         emotionsSet: [
-          Emotion(name: "Happy", color: Colors.orange),
-          Emotion(name: "Sad"),
-          Emotion(name: "Anxious"),
-          Emotion(name: "Angry"),
-          Emotion(name: "Numb"),
-          Emotion(name: "Excited"),
-          Emotion(name: "Stressed"),
-          Emotion(name: "Loving"),
-          Emotion(name: "Passionate"),
+          Emotion(name: "Happy", color: Colors.yellow),
+          Emotion(name: "Excited", color: Colors.yellow),
+          Emotion(name: "Sad", color: Colors.blue),
+          Emotion(name: "Anxious", color: Colors.purple),
+          Emotion(name: "Stressed", color: Colors.purple),
+          Emotion(name: "Angry", color: Colors.red),
+          Emotion(name: "Numb", color: Colors.grey),
+          Emotion(name: "Loving", color: Colors.pink),
+          Emotion(name: "Passionate", color: Colors.pink),
         ],
         factorsSet: [
           Factor(name: "School"),
@@ -85,6 +85,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
-
