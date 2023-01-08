@@ -34,11 +34,7 @@ class _StatTokenState extends State<StatToken> {
 
     return Padding(
       padding: const EdgeInsets.all(5),
-      child: InkWell(
-        splashColor: _tokenColor,
-        customBorder: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30)
-        ),
+      child: GestureDetector(
         onTap: () {
           setState(() {
             _isSelected = !_isSelected;
@@ -54,13 +50,19 @@ class _StatTokenState extends State<StatToken> {
             _tokenColor = (_isSelected) ? fgColor : bgColor;
           });
         },
-        child: Ink(
+        child: AnimatedContainer(
           padding: const EdgeInsets.all(15),
           width: 120,
+
           decoration: BoxDecoration(
             color: _tokenColor,
             borderRadius: const BorderRadius.all(Radius.circular(30))
           ),
+
+          duration: const Duration(milliseconds: 500),
+          // how the animation plays out
+          curve: Curves.fastOutSlowIn,
+
           child: Text(widget.member.toString(),
               textAlign: TextAlign.center,
               style: const TextStyle(color: Colors.black),  // this will probably change eventually when I do a UI 'prettiness' overhaul
